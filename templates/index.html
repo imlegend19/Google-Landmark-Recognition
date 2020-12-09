@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Capstone 2 Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../static/style.css"/>
+</head>
+
+<body>
+<section>
+    <form id="upload-form" action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="preview-zone hidden">
+                            <div class="box box-solid">
+                                <div class="box-header with-border">
+                                    <div><h3><b>Google Landmark Recognition Demo</b></h3></div>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-danger btn-xs remove-preview">
+                                            <i class="fa fa-times"></i> Reset
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="box-body"></div>
+                            </div>
+                        </div>
+                        <div class="dropzone-wrapper">
+                            <div class="dropzone-desc">
+                                <i class="glyphicon glyphicon-download-alt"></i>
+                                <div>Choose an image file or drag it here.</div>
+                            </div>
+                            <input id="file-picker" type="file" name="file" accept="image/*" class="dropzone"/>
+                        </div>
+                        <div class="preview-zone box-header">
+                            <button id="upload-button" type="submit" class="btn btn-danger btn-xs align-content-center">
+                                <i class="fa fa-times"></i> Upload
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="../static/app.js"></script>
+
+<script>
+    $("#file-picker").change(function () {
+        let input = document.getElementById('file-picker');
+        for (let i = 0; i < input.files.length; i++) {
+            let ext = input.files[i].name.substring(input.files[i].name.lastIndexOf('.') + 1).toLowerCase();
+
+            if ((ext === 'jpg') || (ext === 'png') || (ext === "jpeg")) {
+                $("#msg").text("Files are supported")
+            } else {
+                $("#msg").text("Files are NOT supported")
+                document.getElementById("file-picker").value = "";
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
