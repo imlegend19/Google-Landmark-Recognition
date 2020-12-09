@@ -1,4 +1,6 @@
 import os
+
+from flask_ngrok import run_with_ngrok
 from flask import Flask, flash, redirect, render_template, request, send_from_directory, url_for
 from werkzeug.utils import secure_filename
 from local_settings import SECRET_KEY
@@ -9,6 +11,8 @@ UPLOAD_FOLDER = os.path.join(APP_ROOT, "uploads")
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SECRET_KEY'] = SECRET_KEY
+
+run_with_ngrok(app)
 
 
 @app.route('/', methods=['GET', 'POST'])
