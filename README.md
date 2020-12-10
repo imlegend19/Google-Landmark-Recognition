@@ -1,15 +1,12 @@
 # Google Landmark Recognition Flask DEMO
 
-Flask App made for the [Google Landmark Recognition Challenge](https://www.kaggle.com/c/landmark-recognition-2020) that takes as input, an image of a landmark and predicts its label.
-
-We use the [DELG](https://arxiv.org/abs/2001.05027) (Deep Local and Global features) model for retrieval. 
-
-![model](assets/model.png)
-
-
 [![Open Source Love png3](https://badges.frapsoft.com/os/v3/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/) 
 [![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/) 
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT) 
+
+Flask App made for the [Google Landmark Recognition Challenge](https://www.kaggle.com/c/landmark-recognition-2020) that takes as input, an image of a landmark and predicts its label. We use the [DELG](https://arxiv.org/abs/2001.05027) (Deep Local and Global features) model for retrieval. 
+
+![model](assets/model.png)
 
 ## Demo
 
