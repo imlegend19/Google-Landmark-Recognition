@@ -4,9 +4,11 @@
 [![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/) 
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT) 
 
-Flask App made for the [Google Landmark Recognition Challenge](https://www.kaggle.com/c/landmark-recognition-2020) that takes as input, an image of a landmark and predicts its label. We use the [DELG](https://arxiv.org/abs/2001.05027) (Deep Local and Global features) model for retrieval. 
+Flask App made for the [Google Landmark Recognition Challenge](https://www.kaggle.com/c/landmark-recognition-2020) that takes as input, an image of a landmark and predicts its label. We use the [DELG](https://arxiv.org/abs/2001.05027)(Deep Local and Global features)(Cao et al., 2020) model for retrieval. 
 
+### Overview of DELG(Cao et al., 2020)
 ![model](assets/model.png)
+
 
 ## Demo
 
