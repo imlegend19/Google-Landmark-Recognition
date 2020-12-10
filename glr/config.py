@@ -1,6 +1,16 @@
+import os
+
 import tensorflow as tf
 
-DATASET_DIR = "paris"
+ROOT = os.path.dirname(os.path.abspath(__file__))
+
+DATASET_DIR = os.path.join(ROOT, "paris")
+
+TRAIN_LF = os.path.join(ROOT, "train_lf")
+TEST_LF = os.path.join(ROOT, "test_lf")
+
+TRAIN_GF = os.path.join(ROOT, "data/train_gf.pkl")
+TEST_GF = os.path.join(ROOT, "data/test_gf.pkl")
 
 CORRUPTED = [
     'louvre/paris_louvre_000136.jpg',
@@ -42,7 +52,7 @@ MAX_RANSAC_ITERATIONS = 100000
 HOMOGRAPHY_CONFIDENCE = 0.95
 
 # DELG model:
-SAVED_MODEL_DIR = 'delg-saved-models/local_and_global'
+SAVED_MODEL_DIR = os.path.join(ROOT, 'delg-saved-models/local_and_global')
 DELG_MODEL = tf.saved_model.load(SAVED_MODEL_DIR)
 DELG_IMAGE_SCALES_TENSOR = tf.convert_to_tensor([0.70710677, 1.0, 1.4142135])
 DELG_SCORE_THRESHOLD_TENSOR = tf.constant(175.)

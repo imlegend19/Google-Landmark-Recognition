@@ -7,7 +7,7 @@ import numpy as np
 from scipy import spatial
 from tqdm import tqdm
 
-from glr import ID_LABEL, ID_PATH, NUM_TO_RERANK, PATH_ID, TEST, TRAIN
+from glr import ID_LABEL, ID_PATH, NUM_TO_RERANK, PATH_ID, ROOT, TEST, TEST_GF, TEST_LF, TRAIN, TRAIN_GF, TRAIN_LF
 from glr.extract_features import extract_global_features, extract_local_features
 from glr.helpers import (dump_gf, get_image_path, get_num_inliers, get_prediction_map, get_total_score, load_gf,
                          load_labelmap)
@@ -21,7 +21,7 @@ def rescore_and_rerank_by_num_inliers(test_image_id,
 
     try:
         name = os.path.basename(test_image_path).split('.')[0]
-        with open(f'test_lf/{name}.pkl', 'rb') as fp:
+        with open(f'{TEST_LF}/{name}.pkl', 'rb') as fp:
             test_keypoints, test_descriptors = pickle.load(fp)
     except FileNotFoundError:
         test_keypoints, test_descriptors = extract_local_features(test_image_path)
@@ -32,7 +32,7 @@ def rescore_and_rerank_by_num_inliers(test_image_id,
         train_image_path = get_image_path(train_image_id)
         name = os.path.basename(train_image_path).split('.')[0]
 
-        with open(os.path.join("train_lf", f"{name}.pkl"), 'rb') as fp:
+        with open(os.path.join(TRAIN_LF, f"{name}.pkl"), 'rb') as fp:
             train_keypoints, train_descriptors = pickle.load(fp)
 
         num_inliers = get_num_inliers(test_keypoints, test_descriptors,
@@ -49,20 +49,20 @@ def get_predictions(labelmap, infer=None):
     """Gets predictions using embedding similarity and local feature reranking."""
 
     if not infer:
-        test_gf = load_gf('data/test_gf.pkl')
+        test_gf = load_gf(TEST_GF)
         if not test_gf:
             test_ids, test_embeddings = extract_global_features(TEST['path'].tolist())
-            dump_gf('data/test_gf.pkl', (test_ids, test_embeddings))
+            dump_gf(TEST_GF, (test_ids, test_embeddings))
         else:
             test_ids, test_embeddings = test_gf
             del test_gf
     else:
         test_ids, test_embeddings = extract_global_features([infer])
 
-    train_gf = load_gf('data/train_gf.pkl')
+    train_gf = load_gf(TRAIN_GF)
     if not train_gf:
         train_ids, train_embeddings = extract_global_features(TRAIN['path'].tolist())
-        dump_gf('data/train_gf.pkl', (train_ids, train_embeddings))
+        dump_gf(TRAIN_GF, (train_ids, train_embeddings))
     else:
         train_ids, train_embeddings = train_gf
         del train_gf
@@ -93,8 +93,8 @@ def get_predictions(labelmap, infer=None):
     pre_verification_predictions = get_prediction_map(
         test_ids, train_ids_labels_and_scores)
 
-    if not os.path.exists("train_lf"):
-        os.mkdir("train_lf")
+    if not os.path.exists(TRAIN_LF):
+        os.mkdir(TRAIN_LF)
 
     for test_index, test_id in tqdm(enumerate(test_ids),
                                     desc="Rescoring and reranking",
@@ -111,7 +111,7 @@ def get_predictions(labelmap, infer=None):
 
 
 def save_results_csv(predictions):
-    with open('results.csv', 'w') as result_csv:
+    with open(os.path.join(ROOT, 'results.csv'), 'w') as result_csv:
         csv_writer = csv.DictWriter(result_csv, fieldnames=['path', 'landmark', 'score'])
         csv_writer.writeheader()
         for image_path, prediction in predictions.items():
