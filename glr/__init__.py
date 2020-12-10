@@ -3,13 +3,11 @@ import pathlib
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
-from config import *
+from glr.config import *
 import pandas as pd
 
 
 def consider_img(path):
-    path = path.replace('glr/', '')
-
     if path in CORRUPTED:
         return False
     else:
@@ -17,10 +15,10 @@ def consider_img(path):
 
 
 df = pd.DataFrame()
-df['path'] = [str(_) for _ in pathlib.Path(DATASET_DIR).rglob('*.jpg') if consider_img(str(_))]
+df['path'] = [str(_.absolute()) for _ in pathlib.Path(DATASET_DIR).rglob('*.jpg') if consider_img(str(_))]
 
 le = LabelEncoder()
-labels = [s.split('/')[1] for s in df['path'].tolist()]
+labels = [os.path.basename(s).split('.')[0].split('_')[1] for s in df['path'].tolist()]
 le.fit(labels)
 
 ID_LABEL = dict(zip(le.transform(le.classes_), le.classes_))

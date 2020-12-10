@@ -35,8 +35,8 @@ CORRUPTED = [
     'triomphe/paris_triomphe_000867.jpg'
 ]
 
-# Dataset parameters:
-INPUT_DIR = 'content'
+for i in range(len(CORRUPTED)):
+    CORRUPTED[i] = os.path.join(DATASET_DIR, CORRUPTED[i])
 
 # DEBUGGING PARAMS:
 MAX_NUM_EMBEDDINGS = -1
