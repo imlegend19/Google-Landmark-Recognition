@@ -4,7 +4,7 @@
 [![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/) 
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT) 
 
-Flask App made for the [Google Landmark Recognition Challenge](https://www.kaggle.com/c/landmark-recognition-2020) that takes as input, an image of a landmark and predicts its label. We use the [DELG](https://arxiv.org/abs/2001.05027)(Deep Local and Global features)(Cao et al., 2020) model for retrieval. 
+Flask App made for the [Google Landmark Recognition Challenge](https://www.kaggle.com/c/landmark-recognition-2020) that takes as input, an image of a landmark and predicts its label. We use the [DELG](https://arxiv.org/abs/2001.05027) (Deep Local and Global features) (Cao et al., 2020) model for retrieval. 
 
 ### Overview of DELG(Cao et al., 2020)
 ![model](assets/model.png)
@@ -16,7 +16,7 @@ Flask App made for the [Google Landmark Recognition Challenge](https://www.kaggl
 
 ## Installation
 
- 1. Install kaggle in your system as given in [Kaggle API Documentation](https://www.kaggle.com/docs/api).
+ 1. Install `kaggle` in your system as given in [Kaggle API Documentation](https://www.kaggle.com/docs/api).
  2. Clone this repository: `$ git clone https://github.com/imlegend19/Google-Landmark-Recognition.git`  
  3. Create a virtual environment: 
      ```
@@ -36,4 +36,3 @@ Start the Flask App: `$ python app.py`
 > We use Paris10k Dataset for training instead of the original Google-Landmark-Recognition 2020 dataset due to storage 
 > constraints. In case you want to use Google-Landmark-Recognition's dataset, replace the `DATASET_DIR` in 
 > `glr/config.py` and download the dataset inside the same.
-
