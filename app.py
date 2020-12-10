@@ -3,6 +3,8 @@ import os
 from flask_ngrok import run_with_ngrok
 from flask import Flask, flash, redirect, render_template, request, send_from_directory, url_for
 from werkzeug.utils import secure_filename
+
+from glr.infer import infer
 from local_settings import SECRET_KEY
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -37,7 +39,8 @@ def upload_file():
 
 
 def get_prediction(image_path):
-    return "Landmark"
+    landmark, _ = infer(image_path)
+    return landmark
 
 
 @app.route('/result/<filename>')
