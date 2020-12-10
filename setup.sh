@@ -4,13 +4,6 @@ echo "SECRET_KEY = \"$KEY\"" > local_settings.py
 # For flask image storage
 mkdir "uploads"
 
-# Setting up venv
-python -m venv venv
-source venv/bin/activate
-
-# Installing requirements
-pip install -r requirements
-
 echo "Downloading delg saved models..."
 kaggle datasets download --force -d camaskew/delg-saved-models
 7z x delg-saved-models.zip -odelg-saved-models/
